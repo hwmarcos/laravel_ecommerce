@@ -23,5 +23,25 @@ class AdminProductsController extends Controller {
         }
         echo $buffer;
     }
+    
+    public function create() {
+        return 'products create';
+    }
+
+    public function store() {
+        return 'products store';
+    }
+
+    public function destroy($id) {
+       return 'products destroy';
+    }
+
+    public function edit($id) {
+        return 'products edit';
+    }
+    
+    public function update($id){
+       return 'products update';
+    }
 
 }
