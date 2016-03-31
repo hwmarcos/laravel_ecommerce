@@ -3,45 +3,47 @@
 namespace CodeCommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeCommerce\Http\Requests;
+use CodeCommerce\Http\Requests\ProductRequest;
 use CodeCommerce\Http\Controllers\Controller;
+use CodeCommerce\Product;
 
 class AdminProductsController extends Controller {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() {
-        $values = \CodeCommerce\Product::all();
-        $buffer = null;
-        foreach ($values as $val) {
-            $buffer .= "<strong>Name:</strong> {$val->name}<br/>";
-            $buffer .= "<strong>Description:</strong> {$val->description}<br/>";
-            $buffer .= "<strong>Price:</strong> {$val->price}<hr/>";
-        }
-        echo $buffer;
-    }
-    
-    public function create() {
-        return 'products create';
+    private $productModel;
+
+    public function __construct(Product $productModel) {
+        $this->productModel = $productModel;
     }
 
-    public function store() {
-        return 'products store';
+    public function index() {
+        $values = $this->productModel->all();
+        return view('products.index', compact('values'));
+    }
+
+    public function create() {
+        return view('products.create');
+    }
+
+    public function store(ProductRequest $request) {
+        $input = $request->all();
+        $product = $this->productModel->fill($input);
+        $product->save();
+        return redirect()->route('products');
     }
 
     public function destroy($id) {
-       return 'products destroy';
+        $this->productModel->find($id)->delete();
+        return redirect()->route('products');
     }
 
     public function edit($id) {
-        return 'products edit';
+        $value = $this->productModel->find($id);
+        return view('products.edit', compact('value'));
     }
     
-    public function update($id){
-       return 'products update';
+    public function update(ProductRequest $request, $id){
+        $this->productModel->find($id)->update($request->all());
+        return redirect()->route('products');
     }
 
 }
