@@ -32,4 +32,6 @@
     </tbody>
 </table>
 
+{!! $values->render() !!}
+
 @endsection

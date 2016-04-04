@@ -15,6 +15,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Category</th>
             <th>Featured</th>
             <th>Recommend</th>
             <th>Action</th>
@@ -27,6 +28,7 @@
             <td>{{ $value->name }}</td>
             <td>{{ $value->description }}</td>
             <td>{{ $value->price }}</td>
+            <td>{{ $value->category->name }}</td>
             <td>{{ $value->featured == 1 ? 'Yes' : 'No' }}</td>
             <td>{{ $value->recommend == 1 ? 'Yes' : 'No' }}</td>
             <td>
@@ -37,5 +39,7 @@
         @endforeach
     </tbody>
 </table>
+
+{!! $values->render() !!}
 
 @endsection

@@ -18,6 +18,7 @@
 
 <div class='form-group'>
     {!! Form::submit('Add Category', ['class'=>'btn btn-block btn-primary']) !!}
+    <a href="{{ route('categories') }}" class="btn btn-block btn-default">Back</a>
 </div>
 
 

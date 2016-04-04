@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
 
     /*
      * CATEGORIES

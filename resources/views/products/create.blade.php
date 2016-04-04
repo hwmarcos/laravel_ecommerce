@@ -7,6 +7,11 @@
 {!! Form::open(['route'=>'products.store', 'method'=>'POST']) !!}
 
 <div class='form-group'>
+    {!! Form::label('category', 'Category:') !!}
+    {!! Form::select('category_id', $categories, null, ['class'=>'form-control']) !!}
+</div>
+
+<div class='form-group'>
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class'=>'form-control']) !!}
 </div>
@@ -33,6 +38,7 @@
 
 <div class='form-group'>
     {!! Form::submit('Add Category', ['class'=>'btn btn-block btn-primary']) !!}
+    <a href="{{ route('products') }}" class="btn btn-block btn-default">Back</a>
 </div>
 
 {!! Form::close() !!}
