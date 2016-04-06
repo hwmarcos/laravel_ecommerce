@@ -32,6 +32,7 @@
             <td>{{ $value->featured == 1 ? 'Yes' : 'No' }}</td>
             <td>{{ $value->recommend == 1 ? 'Yes' : 'No' }}</td>
             <td>
+                 <a href="{{ route('products.images',['id'=>$value->id]) }}" class="btn btn-xs btn-default">Images</a>
                 <a href="{{ route('products.edit',['id'=>$value->id]) }}" class="btn btn-xs btn-primary">Edit</a>
                 <a href="{{ route('products.destroy',['id'=>$value->id]) }}" class="btn btn-xs btn-danger">Delete</a>
             </td>

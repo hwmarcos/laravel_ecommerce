@@ -39,5 +39,15 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
         Route::get('destroy/{id}', ['as' => 'products.destroy', 'uses' => 'AdminProductsController@destroy']);
         Route::get('edit/{id}', ['as' => 'products.edit', 'uses' => 'AdminProductsController@edit']);
         Route::put('update/{id}', ['as' => 'products.update', 'uses' => 'AdminProductsController@update']);
+
+        /*
+         * PRODUCTS IMAGES
+         */
+        Route::group(['prefix' => 'images'], function() {
+            Route::get('{id}', ['as' => 'products.images', 'uses' => 'AdminProductsController@images']);
+            Route::get('create/{id}', ['as' => 'products.images.create', 'uses' => 'AdminProductsController@createImage']);
+            Route::post('store/{id}', ['as' => 'products.images.store', 'uses' => 'AdminProductsController@storeImage']);
+            Route::get('destroy/{id}', ['as' => 'products.images.destroy', 'uses' => 'AdminProductsController@destroyImage']);
+        });
     });
 });
