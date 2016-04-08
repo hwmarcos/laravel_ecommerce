@@ -37,6 +37,11 @@
 </div>
 
 <div class='form-group'>
+    {!! Form::label('tags', 'Tags:') !!}
+    {!! Form::textarea('tags', null, ['class'=>'form-control']) !!}
+</div>
+
+<div class='form-group'>
     {!! Form::submit('Add Category', ['class'=>'btn btn-block btn-primary']) !!}
     <a href="{{ route('products') }}" class="btn btn-block btn-default">Back</a>
 </div>

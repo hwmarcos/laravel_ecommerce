@@ -11,6 +11,7 @@ use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
 use CodeCommerce\Category;
 use CodeCommerce\Http\Requests\ProductImageRequest;
+use CodeCommerce\Tag;
 
 class AdminProductsController extends Controller {
 
@@ -30,10 +31,18 @@ class AdminProductsController extends Controller {
         return view('products.create', compact('categories'));
     }
 
-    public function store(ProductRequest $request) {
+    public function store(ProductRequest $request, Tag $tag) {
         $input = $request->all();
+
+        $tags = $input['tags'];
+        unset($input['tags']);
+
         $product = $this->productModel->fill($input);
         $product->save();
+
+        //cadastrando as tags
+        $this->updateProductTags($this->productModel->id, $tags, $tag);
+
         return redirect()->route('products');
     }
 
@@ -48,8 +57,13 @@ class AdminProductsController extends Controller {
         return view('products.edit', compact('value', 'categories'));
     }
 
-    public function update(ProductRequest $request, $id) {
-        $this->productModel->find($id)->update($request->all());
+    public function update(ProductRequest $request, $id, Tag $tag) {
+        $input = $request->all();
+        $tags = $input['tags'];
+        unset($input['tags']);
+        $this->productModel->find($id)->update($input);
+        //cadastrando as tags
+        $this->updateProductTags($id, $tags, $tag);
         return redirect()->route('products');
     }
 
@@ -85,6 +99,19 @@ class AdminProductsController extends Controller {
             $image->delete();
         }
         return redirect()->route('products.images', ['id' => $product->id]);
+    }
+
+    public function updateProductTags($prod_id, $tags, $tagObj) {
+        $explode = explode(',', $tags);
+        if (count($explode) > 0) {
+            foreach ($explode as $name) {
+                $tagData = $tagObj->firstOrCreate(['name' => $name]);
+                $tagsIdCollection[] = $tagData->id;
+            }
+            $prodObj = $this->productModel->find($prod_id);
+            $prodObj->tags()->sync($tagsIdCollection);
+        }
+        return;
     }
 
 }
