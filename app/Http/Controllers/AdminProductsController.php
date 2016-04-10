@@ -105,8 +105,10 @@ class AdminProductsController extends Controller {
         $explode = explode(',', $tags);
         if (count($explode) > 0) {
             foreach ($explode as $name) {
-                $tagData = $tagObj->firstOrCreate(['name' => $name]);
-                $tagsIdCollection[] = $tagData->id;
+                if ($name != ' ') {
+                    $tagData = $tagObj->firstOrCreate(['name' => $name]);
+                    $tagsIdCollection[] = $tagData->id;
+                }
             }
             $prodObj = $this->productModel->find($prod_id);
             $prodObj->tags()->sync($tagsIdCollection);
