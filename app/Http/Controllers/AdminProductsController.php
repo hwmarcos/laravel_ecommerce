@@ -106,7 +106,7 @@ class AdminProductsController extends Controller {
         if (count($explode) > 0) {
             foreach ($explode as $name) {
                 if ($name != ' ') {
-                    $tagData = $tagObj->firstOrCreate(['name' => $name]);
+                    $tagData = $tagObj->firstOrCreate(['name' => trim($name)]);
                     $tagsIdCollection[] = $tagData->id;
                 }
             }
