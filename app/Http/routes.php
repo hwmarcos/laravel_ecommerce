@@ -12,6 +12,7 @@
  */
 
 Route::get('/', 'StoreController@index');
+Route::get('product/list/{id}', 'StoreController@productList');
 
 Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
 

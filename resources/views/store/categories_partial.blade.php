@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a href="">{{ $category->name }}</a>
+                        <a href="{{ url('product/list',['id'=>$category->id]) }}">{{ $category->name }}</a>
                     </h4>
                 </div>
             </div>
