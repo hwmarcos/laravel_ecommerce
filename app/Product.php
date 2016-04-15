@@ -27,9 +27,13 @@ class Product extends Model {
     public function scopeFeatured($query) {
         return $query->where('featured', '=', 1)->get();
     }
-    
+
     public function scopeRecommended($query) {
         return $query->where('recommend', '=', 1)->get();
+    }
+
+    public function scopeOfCategory($query, $type) {
+        return $query->where('category_id', '=', $type)->get();
     }
 
     /*
