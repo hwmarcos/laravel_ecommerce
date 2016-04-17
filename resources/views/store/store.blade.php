@@ -9,6 +9,10 @@
 
         <link href="{{ elixir('css/all.css') }}" rel="stylesheet">
 
+        <script>
+
+        </script>
+
     </head><!--/head-->
 
     <body>
@@ -106,7 +110,7 @@
                 <div class="row">
 
                     @yield('categories')
-                    
+
                     @yield('content')
 
                 </div>
@@ -133,8 +137,31 @@
             </div>
 
         </footer><!--/Footer-->
-        
+
         <script src="{{ elixir('js/all.js') }}"></script>
+
+        <script>
+            $(function () {
+
+                $('.updateCartProdQtd').blur(function () {
+
+                    var id = $(this).attr('cod');
+                    var qtd = $(this).val();
+
+                    //requisicao ajax enviando os parâmetros via POST
+                    $.ajax({
+                        'url': 'cart/update/' + id + '/' + qtd,
+                        'type': 'GET',
+                        'success': function (data) {
+                            console.log(data)
+                            location.reload();
+                        }
+                    });
+
+                });
+
+            });
+        </script>
 
     </body>
 </html>

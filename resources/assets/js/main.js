@@ -26,5 +26,10 @@ $(document).ready(function(){
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
+                
+                console.log('aquiiiiiiiiiiiiiii');
+                
 	});
+        
+         console.log('aquiiiiiiiiiiiiiii 2222');
 });
