@@ -147,16 +147,22 @@
 
                     var id = $(this).attr('cod');
                     var qtd = $(this).val();
-
-                    //requisicao ajax enviando os parâmetros via POST
-                    $.ajax({
-                        'url': 'cart/update/' + id + '/' + qtd,
-                        'type': 'GET',
-                        'success': function (data) {
-                            console.log(data)
-                            location.reload();
-                        }
-                    });
+                    
+                    if(qtd > 0){
+                        //requisicao ajax enviando os parâmetros via POST
+                        $.ajax({
+                            'url': 'cart/update/' + id + '/' + qtd,
+                            'type': 'GET',
+                            'success': function (data) {
+                                console.log(data)
+                                location.reload();
+                            }
+                        });
+                    }
+                    else{
+                        alert('A quantidade não pode ser ZERO.');
+                         $(this).focus();
+                    }                    
 
                 });
 
