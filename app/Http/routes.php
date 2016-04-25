@@ -11,6 +11,7 @@
   |
  */
 
+Route::get('/home', 'StoreController@index');
 Route::get('/', 'StoreController@index');
 Route::get('category/{id}', ['as' => 'store.category', 'uses' => 'StoreController@category']);
 Route::get('product/{id}', ['as' => 'store.product', 'uses' => 'StoreController@product']);
@@ -19,8 +20,9 @@ Route::get('cart', ['as' => 'store.cart', 'uses' => 'CartController@index']);
 Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@add']);
 Route::get('cart/update/{id}/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
+Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
 
-Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin', 'where' => ['id' => '[0-9]+']], function() {
 
     /*
      * CATEGORIES
@@ -56,3 +58,21 @@ Route::group(['prefix' => 'admin', 'where' => ['id' => '[0-9]+']], function() {
         });
     });
 });
+
+/*
+ *  AUTH
+ */
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
+Route::controllers([
+    'password' => 'Auth\PasswordController',
+]);

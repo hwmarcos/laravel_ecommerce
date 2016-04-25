@@ -57,6 +57,6 @@ class CartController extends Controller {
         $cart->remove($id_product);
         Session::set('cart', $cart);
         return redirect()->route('store.cart');
-    }
+    }    
 
 }

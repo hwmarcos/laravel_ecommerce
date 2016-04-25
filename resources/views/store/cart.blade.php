@@ -48,7 +48,9 @@
                         <td colspan="6">
                             <div class="pull-right">
                                 <h3>Total: R$ {{ $cart->getTotal() }}</h3>
-                                <a href="#" class="btn btn-block btn-success">FECHAR A CONTA</a>
+                                <a href="{{ route('checkout.place') }}" class="btn btn-block btn-success">
+                                    FECHAR A CONTA
+                                </a>
                             </div>
                         </td>
                     </tr>

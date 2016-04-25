@@ -19,6 +19,9 @@ class AdminProductsController extends Controller {
 
     public function __construct(Product $productModel) {
         $this->productModel = $productModel;
+        
+        //$this->middleware('auth');
+        
     }
 
     public function index() {

@@ -9,10 +9,6 @@
 
         <link href="{{ elixir('css/all.css') }}" rel="stylesheet">
 
-        <script>
-
-        </script>
-
     </head><!--/head-->
 
     <body>
@@ -54,9 +50,9 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
-                                    <li><a href="http://commerce.dev:10088/checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="http://commerce.dev:10088/cart"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-                                    <li><a href="http://commerce.dev:10088/auth/login"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="{{ url('auth/logout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="{{ route('store.cart') }}"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
+                                    <li><a href="{{ url('auth/login') }}"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -141,32 +137,32 @@
         <script src="{{ elixir('js/all.js') }}"></script>
 
         <script>
-            $(function () {
+        $(function () {
 
-                $('.updateCartProdQtd').blur(function () {
+            $('.updateCartProdQtd').blur(function () {
 
-                    var id = $(this).attr('cod');
-                    var qtd = $(this).val();
-                    
-                    if(qtd > 0){
-                        //requisicao ajax enviando os parâmetros via POST
-                        $.ajax({
-                            'url': 'cart/update/' + id + '/' + qtd,
-                            'type': 'GET',
-                            'success': function (data) {
-                                console.log(data)
-                                location.reload();
-                            }
-                        });
-                    }
-                    else{
-                        alert('A quantidade não pode ser ZERO.');
-                         $(this).focus();
-                    }                    
+                var id = $(this).attr('cod');
+                var qtd = $(this).val();
 
-                });
+                if (qtd > 0) {
+                    //requisicao ajax enviando os parâmetros via POST
+                    $.ajax({
+                        'url': 'cart/update/' + id + '/' + qtd,
+                        'type': 'GET',
+                        'success': function (data) {
+                            //console.log(data)
+                            location.reload();
+                        }
+                    });
+                }
+                else {
+                    alert('A quantidade não pode ser ZERO.');
+                    $(this).focus();
+                }
 
             });
+
+        });
         </script>
 
     </body>
