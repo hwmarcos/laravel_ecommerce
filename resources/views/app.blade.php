@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Laravel</title>
-        
-         <script src="{{ elixir('js/all.js') }}"></script>
+
+        <script src="{{ elixir('js/all.js') }}"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +40,7 @@
                         @if (!Auth::guest())
                         <li><a href="{{ route('products') }}">Products</a></li>
                         <li><a href="{{ route('categories') }}">Categories</a></li>
-                         @endif
+                        @endif
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -62,5 +62,28 @@
                 @yield('content')
             </div>
         </div>
+
+        <script>
+        $(function () {
+
+            $('.orderStatus').change(function () {
+
+                var id = $(this).attr('cod');
+                var status = $(this).val();
+
+                $.ajax({
+                    'url': 'order/update/' + id + '/' + status,
+                    'type': 'GET',
+                    'success': function (data) {
+                        console.log(data)
+                        //location.reload();
+                    }
+                });
+
+            });
+
+        });
+        </script>
+
     </body>
 </html>

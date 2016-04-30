@@ -19,8 +19,8 @@
                         <div class="col-sm-6">
                             <div class="contactinfo">
                                 <ul class="nav nav-pills">
-                                    <li><a href="#"><i class="fa fa-phone"></i> (19) 5555-5555</a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i> atendimento@schoolofnet.com</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i> (11) 5555-5555</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope"></i> contacts@ecommerce.com</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -42,17 +42,19 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="/"><span>CodeCommerce</span></a>
+                                <a href="/"><span>MyEcommerce</span></a>
                             </div>
-
                         </div>
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
-                                    <li><a href="{{ url('auth/logout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="{{ route('store.cart') }}"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-                                    <li><a href="{{ url('auth/login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="{{ route('account.orders') }}"><i class="fa fa-user"></i> My Account</a></li>
+                                    <li><a href="{{ route('store.cart') }}"><i class="fa fa-shopping-cart"></i> My cart</a></li>
+                                    @if(Auth::guest())
+                                    <li><a href="{{ url('auth/login') }}">Login</a></li>
+                                    @else
+                                    <li><a href="{{ url('auth/logout') }}">Logout - ({{ Auth::user()->name }})</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -81,7 +83,13 @@
                                             <li><a href="product-details.html">Product Details</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
                                             <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="login.html">Login</a></li>
+
+                                            @if(Auth::guest())
+                                            <li><a href="{{ url('auth/login') }}">Login</a></li>
+                                            @else
+                                            <li><a href="{{ url('auth/logout') }}">Logout</a></li>
+                                            @endif
+
                                         </ul>
                                     </li>
 
@@ -98,8 +106,6 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-
-
 
         <section>
             <div class="container">
@@ -137,32 +143,32 @@
         <script src="{{ elixir('js/all.js') }}"></script>
 
         <script>
-        $(function () {
+$(function () {
 
-            $('.updateCartProdQtd').blur(function () {
+    $('.updateCartProdQtd').blur(function () {
 
-                var id = $(this).attr('cod');
-                var qtd = $(this).val();
+        var id = $(this).attr('cod');
+        var qtd = $(this).val();
 
-                if (qtd > 0) {
-                    //requisicao ajax enviando os parâmetros via POST
-                    $.ajax({
-                        'url': 'cart/update/' + id + '/' + qtd,
-                        'type': 'GET',
-                        'success': function (data) {
-                            //console.log(data)
-                            location.reload();
-                        }
-                    });
+        if (qtd > 0) {
+            //requisicao ajax enviando os parâmetros via POST
+            $.ajax({
+                'url': 'cart/update/' + id + '/' + qtd,
+                'type': 'GET',
+                'success': function (data) {
+                    //console.log(data)
+                    location.reload();
                 }
-                else {
-                    alert('A quantidade não pode ser ZERO.');
-                    $(this).focus();
-                }
-
             });
+        }
+        else {
+            alert('A quantidade não pode ser ZERO.');
+            $(this).focus();
+        }
 
-        });
+    });
+
+});
         </script>
 
     </body>

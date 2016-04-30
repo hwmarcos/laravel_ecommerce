@@ -16,6 +16,12 @@ $factory->define(CodeCommerce\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->email,
         'is_admin' => rand(0, 1),
+        'cep' => $faker->postcode,
+        'endereco' => $faker->address,
+        'numero' => rand(100, 1000),
+        'bairro' => $faker->citySuffix,
+        'cidade' => $faker->city,
+        'uf' => $faker->stateAbbr,
         'password' => bcrypt(123),
         'remember_token' => str_random(10),
     ];

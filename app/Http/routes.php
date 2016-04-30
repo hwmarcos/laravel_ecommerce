@@ -20,9 +20,24 @@ Route::get('cart', ['as' => 'store.cart', 'uses' => 'CartController@index']);
 Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@add']);
 Route::get('cart/update/{id}/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
-Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+
+/*
+ * ROTAS PARA USUÁRIOS LOGADOS
+ */
+
+Route::group(['middleware' => 'auth'], function(){   
+    Route::get('checkout/placeOrder', ['as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
+    Route::get('account/orders', ['as' => 'account.orders', 'uses' => 'AccountController@orders']);    
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => 'authAdmin', 'where' => ['id' => '[0-9]+']], function() {
+    
+    /*
+     *  ORDERS
+     */
+    Route::get('orders', ['as' => 'orders', 'uses' => 'OrderController@index']);     
+    Route::get('order/update/{id}/{status}', ['as' => 'oder.update', 'uses' => 'OrderController@update']);
+    
 
     /*
      * CATEGORIES

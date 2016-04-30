@@ -1,4 +1,4 @@
-@extends('app')
+@extends('store.store')
 
 @section('content')
 <div class="container">
@@ -50,11 +50,12 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-block btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn btn-link" href="{{ url('auth/register') }}">Register User</a>   
                             </div>
                         </div>
                     </form>

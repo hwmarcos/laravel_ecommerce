@@ -10,7 +10,11 @@ class OrderItem extends Model {
     protected $fillable = ['product_id', 'qtd', 'price'];
 
     public function order() {
-        $this->belongsTo('CodeCommerce\Order');
+        return $this->belongsTo('CodeCommerce\Order');
+    }
+
+    public function product() {
+        return $this->belongsTo('CodeCommerce\Product');
     }
 
 }
