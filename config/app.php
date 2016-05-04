@@ -123,6 +123,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         //mine
         Illuminate\Html\HtmlServiceProvider::class,
+        LaravelPagseguro\LaravelPagseguroServiceProvider::class,
         /*
          * Application Service Providers...
          */

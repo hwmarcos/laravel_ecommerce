@@ -21,6 +21,9 @@ Route::get('cart/add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@add']
 Route::get('cart/update/{id}/{qtd}', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 Route::get('cart/destroy/{id}', ['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
 
+Route::get('test', 'CheckoutController@test');
+Route::get('checkout/checkoutReturn', ['as' => 'store.checkout.checkoutReturn', 'uses' => 'CheckoutController@checkoutReturn']);
+
 /*
  * ROTAS PARA USUÁRIOS LOGADOS
  */
